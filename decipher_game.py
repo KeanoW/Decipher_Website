@@ -1,9 +1,9 @@
 import cipher_functions as ciph_function
 import api
 import time
-# phrase = api.get_quote(type="q")
-phrase = "Trust in the Lord with all your heart and lean not on your own understanding, in all your ways submit to  \
-         him and He will make your path straight."
+phrase = api.get_quote(type="q")
+# phrase = "Trust in the Lord with all your heart and lean not on your own understanding, in all your ways submit to  \
+#          him and He will make your path straight."
 print(phrase)
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
             "v", "w", "x", "y", "z", "*", "/", ",", "+", "&", "^", "'", "(", ")", "=", ";", "{", "}", "[", "]", "?",
@@ -19,7 +19,7 @@ modified_ciphered_phrase = []
 modified_dict = {}
 ciph_char = False
 repl_ciph_char = False
-start_time = time.time()
+# start_time = time.time()
 while(True):
     if count < 1:
         ciphered_phrase_str = "".join(map(str, ciphered_phrase))
@@ -51,8 +51,8 @@ while(True):
 
     if list(modified_dict.values()) == phrase_alphabet:
         print("Phrase deciphered!")
-        # auther = api.get_quote(type="a")
-        auther = "Solomon"
+        auther = api.get_quote(type="a")
+        # auther = "Solomon"
         print(f"{phrase} - {auther}")
         break
         end_time = time.time()

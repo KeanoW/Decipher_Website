@@ -60,14 +60,12 @@
                <form action="change_char" method="post" class="reveal-content">
                   <div class="row" >
                     <div class="col-md-7">
-                        <p id="phrase">?/{ascvvf[)oq@#$,</p>
+                        <p id="phrase">{{ciphered_phrase_str}}</p>
                         <div class="form-group">
                           <select name="char" class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            {% for var in cipher_dict.values()%}
+                            <option>{{var}}</option>
+                            {% endfor %}
                           </select>
                         </div>
                       <div class="form-group">
