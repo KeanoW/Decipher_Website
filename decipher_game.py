@@ -18,7 +18,6 @@ count = 0
 modified_ciphered_phrase = []
 modified_dict = {}
 ciph_char = False
-repl_ciph_char = False
 # start_time = time.time()
 while(True):
     if count < 1:
@@ -36,20 +35,14 @@ while(True):
 
     replace_ciphered_char = input("New character: ").lower()
 
-    if replace_ciphered_char not in alphabet:
-        print("Not Valid character! Try Again")
-        replace_ciphered_char = input("New character: ").lower()
-    else:
-        repl_ciph_char = True
-
-    if ciph_char is True and repl_ciph_char is True:
+    if ciph_char is True:
         modified_dict = ciph_function.changed_dict(ciphered_char, replace_ciphered_char, cipher_dict)
         modified_ciphered_phrase = ciph_function.update_cipher(filtered_phrase_list, modified_dict)
 
         ciphered_phrase_str = "".join(map(str, modified_ciphered_phrase))
         print(ciphered_phrase_str)
 
-    if list(modified_dict.values()) == phrase_alphabet:
+    if list(modified_dict.values()) == list(modified_dict.keys()):
         print("Phrase deciphered!")
         auther = api.get_quote(type="a")
         # auther = "Solomon"

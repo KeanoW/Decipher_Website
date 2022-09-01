@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import cipher_functions as ciph_function
 import api
 
@@ -10,14 +10,9 @@ alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"
 phrase_alphabet = ciph_function.get_alphabet_of_phrase(ciph_function.remove_punctuation_marks(phrase))
 cipher_dict = dict(zip(phrase_alphabet, ciph_function.create_cipher_key_list(alphabet, phrase_alphabet)))
 cipher_chars = ciph_function.create_cipher_key_list(alphabet, phrase_alphabet)
-# print(cipher_dict)
 filtered_phrase_list = ciph_function.remove_punctuation_marks(phrase)
 ciphered_phrase = ciph_function.create_cipher_phrase(filtered_phrase_list, cipher_dict)
 ciphered_phrase_str = "".join(map(str, ciphered_phrase))
-# print(f"ciphered phrase: {ciphered_phrase_str}")
-count = 0
-modified_ciphered_phrase = []
-modified_dict = {}
 
 app = Flask(__name__)
 
@@ -28,18 +23,31 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, cipher_dict=cipher_dict)
+    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
 
 @app.route("/cipher")
 def cipher():
-    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, )
+    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
 
 @app.route('/change_char', methods=['POST', 'GET'])
 def change_char():
+    ciph_char = False
+    ciphered_phrase_str = ""
     if request.method == 'POST':
         data = request.form.to_dict()
-        print(data)
-        return render_template("/cipher.html")
+        ciphered_char = data['ciph_char'].lower()
+
+        if ciphered_char in alphabet:
+            ciph_char = True
+
+        replace_ciphered_char = data['new_char'].lower()
+
+        if ciph_char is True:
+            modified_dict = ciph_function.changed_dict(ciphered_char, replace_ciphered_char, cipher_dict)
+            modified_ciphered_phrase = ciph_function.update_cipher(filtered_phrase_list, modified_dict)
+
+        ciphered_phrase_str = "".join(map(str, modified_ciphered_phrase))
+        return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
     else:
         return "Oops! Something went wrong."
 
