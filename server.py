@@ -13,7 +13,7 @@ cipher_chars = ciph_function.create_cipher_key_list(alphabet, phrase_alphabet)
 filtered_phrase_list = ciph_function.remove_punctuation_marks(phrase)
 ciphered_phrase = ciph_function.create_cipher_phrase(filtered_phrase_list, cipher_dict)
 ciphered_phrase_str = "".join(map(str, ciphered_phrase))
-
+ciph_char = True
 app = Flask(__name__)
 
 # @app.route("/")
@@ -23,16 +23,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
+    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, ciph_char=ciph_char)
 
 @app.route("/cipher")
 def cipher():
-    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
+    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, ciph_char=ciph_char)
 
-@app.route('/change_char', methods=['POST', 'GET'])
-def change_char():
+@app.route('/decipher', methods=['POST', 'GET'])
+def decipher():
     ciph_char = False
-    ciphered_phrase_str = ""
     if request.method == 'POST':
         data = request.form.to_dict()
         ciphered_char = data['ciph_char'].lower()
@@ -47,17 +46,6 @@ def change_char():
             modified_ciphered_phrase = ciph_function.update_cipher(filtered_phrase_list, modified_dict)
 
         ciphered_phrase_str = "".join(map(str, modified_ciphered_phrase))
-        return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
+        return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, ciph_char=ciph_char)
     else:
         return "Oops! Something went wrong."
-
-@app.route("/about")
-def about():
-    return render_template("/about.html")
-
-@app.route("/components")
-def components():
-    return render_template("/components.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)

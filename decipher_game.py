@@ -23,6 +23,7 @@ while(True):
     if count < 1:
         ciphered_phrase_str = "".join(map(str, ciphered_phrase))
         print(ciphered_phrase_str)
+        # print(phrase)
         count = 1
 
     ciphered_char = input("Character you want to change: ").lower()
