@@ -15,7 +15,7 @@ def remove_punctuation_marks(phrase):
     phrase = phrase.lower()
     phrase_list = list(phrase)
     new_phrase_list = []
-    punctuation_list = ('!', ',', '?', '/', '.', ' ')
+    punctuation_list = ('!', ',', '?', '/', '.', ' ', '\'')
 
     for char in phrase_list:
         if char not in punctuation_list:
