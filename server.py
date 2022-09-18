@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import cipher_functions as ciph_function
 from flask_sqlalchemy import SQLAlchemy
-from random import  randint
+from random import randint
 
 #Config
 app = Flask(__name__)
@@ -31,7 +31,8 @@ def get_phrase_from_db(type):
     elif type == "a":
         return first_quote.auther
 
-phrase = get_phrase_from_db(type="q")
+# phrase = get_phrase_from_db(type="q")
+phrase = "hello"
 print(phrase)
 author = get_phrase_from_db(type="a")
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
@@ -44,18 +45,18 @@ cipher_chars = ciph_function.create_cipher_key_list(alphabet, phrase_alphabet)
 filtered_phrase_list = ciph_function.remove_punctuation_marks(phrase)
 ciphered_phrase = ciph_function.create_cipher_phrase(filtered_phrase_list, cipher_dict)
 ciphered_phrase_str = "".join(map(str, ciphered_phrase))
-ciph_char = True
-modified_dict = {}
+
 
 @app.route("/")
 @app.route("/cipher")
 def cipher():
-    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, modified_dict = modified_dict)
+    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
 
 @app.route('/decipher', methods=['POST', 'GET'])
 def decipher():
     ciph_char = True
     modified_dict = {}
+    deciphered = False
     if request.method == 'POST':
         data = request.form.to_dict()
         ciphered_char = data['ciph_char'].lower()
@@ -70,7 +71,10 @@ def decipher():
             modified_ciphered_phrase = ciph_function.update_cipher(filtered_phrase_list, modified_dict)
 
         ciphered_phrase_str = "".join(map(str, modified_ciphered_phrase))
-        return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, ciph_char=ciph_char, modified_dict=modified_dict)
+        print(f"Keys: {modified_dict.keys()} Values: {modified_dict.values()}")
+        if modified_dict.keys() == modified_dict.values():
+            deciphered = True
+        return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, ciph_char=ciph_char, deciphered=deciphered)
     else:
         return "Oops! Something went wrong."
 

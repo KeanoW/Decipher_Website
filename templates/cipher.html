@@ -37,7 +37,8 @@
   </nav>
 </header>
 
-{% if modified_dict.keys() != modified_dict.values()%}
+{% if deciphered ==  False %}
+<div> {{deciphered}}</div>
     <div class="section-container">
         <div class="container">
           <div class="row">
@@ -64,7 +65,7 @@
                     </form>
 
                   {% if ciph_char == False %}
-                    <div class="alert-danger alert" role="alert">The character you have entered isn't in the cipher! Bitch</div>
+                    <div class="alert-danger alert" role="alert">The character you have entered isn't in the cipher!</div>
                   {% endif %}
                 </div>
               </div>
