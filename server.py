@@ -6,7 +6,6 @@ from random import randint
 #Config
 app = Flask(__name__)
 app.config['TESTING'] = True
-app.config['DEBUG'] = True
 app.config['FLASK_ENV'] = 'development'
 app.config['DEBUG'] = True
 
