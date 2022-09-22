@@ -37,8 +37,8 @@
   </nav>
 </header>
 
-{% if deciphered ==  False %}
-<div> {{deciphered}}</div>
+{% if not deciphered %}
+<div>{{ciph_char}}</div>
     <div class="section-container">
         <div class="container">
           <div class="row">
@@ -54,19 +54,18 @@
                         <div class="col-md-7">
                             <p class="phrase">{{ciphered_phrase_str}}</p>
                            <div class="form-group">
-                            <input name="ciph_char" type="text" class="form-control" id="ciph_char" placeholder="Cipher Character">
+                            <input name="ciph_char" type="text" class="form-control" id="ciph_char" placeholder="Cipher Character" required>
                           </div>
                           <div class="form-group">
-                            <input name="new_char" type="text" class="form-control" id="new_char" placeholder="New Character">
+                            <input name="new_char" type="text" class="form-control" id="new_char" placeholder="New Character" required>
                           </div>
-                          <button type="submit" class="btn btn-default btn-lg">Decipher</button>
+                            <button type="submit" class="btn btn-default btn-lg">Decipher</button>
+                            {% if not ciph_char %}
+                            <div class="alert-danger alert" role="alert" id="error">The character you have entered isn't in the cipher!</div>
+                            {% endif %}
                         </div>
                       </div>
                     </form>
-
-                  {% if ciph_char == False %}
-                    <div class="alert-danger alert" role="alert">The character you have entered isn't in the cipher!</div>
-                  {% endif %}
                 </div>
               </div>
 
@@ -82,7 +81,6 @@
               <div class="section-container-spacer text-center">
                 <h1 class="h2">Phrase Deciphered</h1>
               </div>
-
               <div class="row">
                 <div class="col-md-10 col-md-offset-3">
                    <form action="" method="" class="reveal-content">
@@ -94,7 +92,6 @@
                    </form>
                 </div>
               </div>
-
            </div>
           </div>
         </div>

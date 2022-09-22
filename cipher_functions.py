@@ -1,4 +1,4 @@
-from random import sample, shuffle
+from random import shuffle
 
 def create_cipher_key_list(alphabet, phrase_alphabet):
     shuffle(alphabet)
