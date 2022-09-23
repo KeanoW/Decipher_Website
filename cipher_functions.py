@@ -69,7 +69,6 @@ def create_cipher_phrase(phrase_list, cipher_dict):
 def changed_dict(ciphered_char, replace_ciphered_char, cipher_dict):
     for k, v in cipher_dict.items():
         if v == ciphered_char:
-            # if k != v:
             if replace_ciphered_char in list(cipher_dict.values()):
                 keys = list(cipher_dict.keys())
                 values = list(cipher_dict.values())
@@ -77,7 +76,6 @@ def changed_dict(ciphered_char, replace_ciphered_char, cipher_dict):
                 value_index = values.index(replace_ciphered_char)
                 key = keys[value_index]
                 cipher_dict[key] = ciphered_char
-                # cipher_dict[k] = replace_ciphered_char
             cipher_dict[k] = replace_ciphered_char
     return cipher_dict
 

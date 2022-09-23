@@ -42,17 +42,18 @@ cipher_chars = ciph_function.create_cipher_key_list(alphabet, phrase_alphabet)
 filtered_phrase_list = ciph_function.remove_punctuation_marks(phrase)
 ciphered_phrase = ciph_function.create_cipher_phrase(filtered_phrase_list, cipher_dict)
 ciphered_phrase_str = "".join(map(str, ciphered_phrase))
+CIPH_CHAR = True
 
 @app.route("/")
 @app.route("/cipher")
 def cipher():
-    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str)
+    global  CIPH_CHAR
+    return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, ciph_char=CIPH_CHAR)
 
 @app.route('/decipher', methods=['POST', 'GET'])
 def decipher():
     deciphered = False
-    global ciphered_phrase_str, phrase, author
-    ciph_char = True
+    global ciphered_phrase_str, phrase, author, CIPH_CHAR
     ciph_char_values = []
     replace_char_values = []
 
@@ -62,9 +63,10 @@ def decipher():
         replace_ciphered_char = data['new_char'].lower()
 
         if ciphered_char not in ciphered_phrase_str:
-            ciph_char = False
+            CIPH_CHAR = False
 
         else:
+            CIPH_CHAR = True
             ciph_char_values.append(ciphered_char)
             replace_char_values.append(replace_ciphered_char)
 
@@ -90,9 +92,9 @@ def decipher():
                 modified_ciphered_phrase = ciph_function.update_cipher(filtered_phrase_list, modified_dict)
                 ciphered_phrase_str = "".join(map(str, modified_ciphered_phrase))
 
-        return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, deciphered=deciphered, ciph_char=ciph_char, phrase=phrase, author=author)
+        return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, deciphered=deciphered, ciph_char=CIPH_CHAR, phrase=phrase, author=author)
     else:
-        return "Oops! Something went wrong."
+        return render_template("/error.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
