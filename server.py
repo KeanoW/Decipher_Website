@@ -38,7 +38,6 @@ alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"
 
 phrase_alphabet = ciph_function.get_alphabet_of_phrase(ciph_function.remove_punctuation_marks(phrase))
 cipher_dict = dict(zip(phrase_alphabet, ciph_function.create_cipher_key_list(alphabet, phrase_alphabet)))
-cipher_chars = ciph_function.create_cipher_key_list(alphabet, phrase_alphabet)
 filtered_phrase_list = ciph_function.remove_punctuation_marks(phrase)
 ciphered_phrase = ciph_function.create_cipher_phrase(filtered_phrase_list, cipher_dict)
 ciphered_phrase_str = "".join(map(str, ciphered_phrase))
@@ -47,7 +46,7 @@ CIPH_CHAR = True
 @app.route("/")
 @app.route("/cipher")
 def cipher():
-    global  CIPH_CHAR
+    global CIPH_CHAR
     return render_template("/cipher.html", ciphered_phrase_str=ciphered_phrase_str, ciph_char=CIPH_CHAR)
 
 @app.route('/decipher', methods=['POST', 'GET'])

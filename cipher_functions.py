@@ -1,4 +1,4 @@
-from random import shuffle
+from random import shuffle, randint
 
 def create_cipher_key_list(alphabet, phrase_alphabet):
     shuffle(alphabet)
@@ -10,6 +10,26 @@ def create_cipher_key_list(alphabet, phrase_alphabet):
     cipher_key_list = alphabet_removd_phrase_alph_list[:len(phrase_alphabet)]
 
     return cipher_key_list
+
+def create_cipher_key_list_random_spaces(alphabet, phrase_alphabet, phrase):
+    shuffle(alphabet)
+    alphabet_removd_phrase_alph_list = []
+    phrase_alphabet_removed = []
+    for letter in alphabet:
+        if letter not in phrase_alphabet:
+            alphabet_removd_phrase_alph_list.append(letter)
+    phrase_start_end = set(phrase[0:2] + list(phrase[-2] + phrase[-1]))
+    for letter in phrase_alphabet:
+        if letter not in phrase_start_end:
+            phrase_alphabet_removed.append(letter)
+
+    cipher_key_list = alphabet_removd_phrase_alph_list[:len(phrase_alphabet)]
+    dict_cipher_key = dict(zip(phrase_alphabet, cipher_key_list))
+    random_index = randint(0, len(phrase_alphabet_removed)-1)
+    random_letter = phrase_alphabet_removed[random_index]
+    dict_cipher_key[random_letter] = " "
+
+    return list(dict_cipher_key.values())
 
 def remove_punctuation_marks(phrase):
     phrase = phrase.lower()
