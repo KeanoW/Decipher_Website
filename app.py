@@ -5,12 +5,12 @@ from random import randint
 
 #Config
 app = Flask(__name__)
-app.config['TESTING'] = True
-app.config['FLASK_ENV'] = 'development'
-app.config['DEBUG'] = True
+# app.config['TESTING'] = True
+# app.config['FLASK_ENV'] = 'development'
+# app.config['DEBUG'] = True
 
 #DATABASE
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///site.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://dhvcykblkuglhn:e6c0ce0e1523d8fedde25c74443c8d021bd1b2f948f257e744e84f67be5873ce@ec2-3-93-206-109.compute-1.amazonaws.com:5432/d5q970ot4dok'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
@@ -96,4 +96,4 @@ def decipher():
         return render_template("/error.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
