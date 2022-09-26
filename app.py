@@ -23,15 +23,17 @@ class Quotes(db.Model):
     def __repr__(self):
         return f"Quote: {self.quote} - {self.auther}"
 
-def get_phrase_from_db(type):
-    rand = randint(1, 84)
-    first_quote = Quotes.query.get(rand)
-    if type == "q":
-        return first_quote.quote
-    elif type == "a":
-        return first_quote.auther
+# def get_phrase_from_db(type):
+#     rand = randint(1, 84)
+#     first_quote = Quotes.query.get(rand)
+#     if type == "q":
+#         return first_quote.quote
+#     elif type == "a":
+#         return first_quote.auther
 
 # phrase = get_phrase_from_db(type="q")
+phrase = "hello"
+author = "test"
 # author = get_phrase_from_db(type="a")
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
             "v", "w", "x", "y", "z", "*", "/", ",", "+", "&", "^", "'", "(", ")", "=", ";", "{", "}", "[", "]", "?",
