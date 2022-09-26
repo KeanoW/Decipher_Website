@@ -43,7 +43,7 @@ ciphered_phrase = ciph_function.create_cipher_phrase(filtered_phrase_list, ciphe
 ciphered_phrase_str = "".join(map(str, ciphered_phrase))
 CIPH_CHAR = True
 
-# @app.route("/")
+@app.route("/")
 @app.route("/cipher")
 def cipher():
     global CIPH_CHAR
