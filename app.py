@@ -11,9 +11,6 @@ app = Flask(__name__)
 # app.config['DEBUG'] = True
 
 #DATABASE
-uri = os.getenv("SQLALCHEMY_DATABASE_URI")  # or other relevant config var
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://dhvcykblkuglhn:e6c0ce0e1523d8fedde25c74443c8d021bd1b2f948f257e744e84f67be5873ce@ec2-3-93-206-109.compute-1.amazonaws.com:5432/d5q970ot4dok'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
