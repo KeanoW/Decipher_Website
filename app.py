@@ -17,7 +17,7 @@ db = SQLAlchemy(app)
 
 class Quotes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    quote =db.Column(db.String(60), nullable=False)
+    quote =db.Column(db.String(250), nullable=False)
     auther = db.Column(db.String(40), nullable=False)
 
     def __repr__(self):
