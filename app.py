@@ -2,10 +2,14 @@ from flask import Flask, render_template, request
 import cipher_functions as ciph_function
 from flask_sqlalchemy import SQLAlchemy
 from random import randint
+from flask_session import Session
 import os
 
 #Config
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 # app.config['TESTING'] = True
 # app.config['FLASK_ENV'] = 'development'
 # app.config['DEBUG'] = True
