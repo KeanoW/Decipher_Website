@@ -6,6 +6,7 @@ from random import randint
 
 #Config
 app = Flask(__name__)
+app.secret_key = "^)I2A%r7#jCzHb$G"
 # app.config['TESTING'] = True
 # app.config['FLASK_ENV'] = 'development'
 # app.config['DEBUG'] = True
