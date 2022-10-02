@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template,request, session
 import cipher_functions as ciph_function
 from flask_sqlalchemy import SQLAlchemy
 from random import randint
-import os
+
 
 #Config
 app = Flask(__name__)
@@ -31,8 +31,11 @@ def get_phrase_from_db(type):
     elif type == "a":
         return first_quote.auther
 
-phrase = get_phrase_from_db(type="q")
-author = get_phrase_from_db(type="a")
+session["phrase"] = get_phrase_from_db(type="q")
+session["author"] = get_phrase_from_db(type="a")
+
+phrase = session["phrase"]
+author = session["author"]
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
             "v", "w", "x", "y", "z", "*", "/", ",", "+", "&", "^", "'", "(", ")", "=", ";", "{", "}", "[", "]", "?",
             "=", "_", ">", "<", ":", "-", "!", "#", "@", "%"]
