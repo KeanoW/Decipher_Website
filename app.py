@@ -32,11 +32,15 @@ def get_phrase_from_db(type):
     elif type == "a":
         return first_quote.auther
 
+
 session["phrase"] = get_phrase_from_db(type="q")
 session["author"] = get_phrase_from_db(type="a")
 
 phrase = session["phrase"]
+
 author = session["author"]
+
+print(session)
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
             "v", "w", "x", "y", "z", "*", "/", ",", "+", "&", "^", "'", "(", ")", "=", ";", "{", "}", "[", "]", "?",
             "=", "_", ">", "<", ":", "-", "!", "#", "@", "%"]

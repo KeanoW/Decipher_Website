@@ -2,7 +2,7 @@ import requests
 import jsonpickle
 import time
 
-def get_quote(type):
+def get_quote_api(type):
     response = jsonpickle.decode(requests.get("https://zenquotes.io/api/quotes/mode=random").text)
     info = response[1]
     auther = info['a']
