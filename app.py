@@ -2,6 +2,7 @@ from flask import Flask, render_template,request, session
 import cipher_functions as ciph_function
 from flask_sqlalchemy import SQLAlchemy
 from random import randint
+from api import get_quote_api
 
 
 #Config
@@ -11,34 +12,31 @@ app.secret_key = "^)I2A%r7#jCzHb$G"
 # app.config['FLASK_ENV'] = 'development'
 # app.config['DEBUG'] = True
 
-#DATABASE
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://tvsifgrgcqhjny:d481461a53360c7a1741b55c8e135ac270b43b9ba4557c719b7bd7c5ab6b2de8@ec2-52-21-207-163.compute-1.amazonaws.com:5432/d31rcoc5qej018'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
+# #DATABASE
+# app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://tvsifgrgcqhjny:d481461a53360c7a1741b55c8e135ac270b43b9ba4557c719b7bd7c5ab6b2de8@ec2-52-21-207-163.compute-1.amazonaws.com:5432/d31rcoc5qej018'
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# db = SQLAlchemy(app)
+#
+# class Quotes(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     quote =db.Column(db.String(250), nullable=False)
+#     auther = db.Column(db.String(40), nullable=False)
+#
+#     def __repr__(self):
+#         return f"Quote: {self.quote} - {self.auther}"
 
-class Quotes(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    quote =db.Column(db.String(250), nullable=False)
-    auther = db.Column(db.String(40), nullable=False)
-
-    def __repr__(self):
-        return f"Quote: {self.quote} - {self.auther}"
-
-def get_phrase_from_db(type):
-    rand = randint(1, 84)
-    first_quote = Quotes.query.get(rand)
-    if type == "q":
-        return first_quote.quote
-    elif type == "a":
-        return first_quote.auther
+# def get_phrase_from_db(type):
+#     rand = randint(1, 84)
+#     first_quote = Quotes.query.get(rand)
+#     if type == "q":
+#         return first_quote.quote
+#     elif type == "a":
+#         return first_quote.auther
 
 
-session["phrase"] = get_phrase_from_db(type="q")
-session["author"] = get_phrase_from_db(type="a")
+phrase = get_quote_api(type="q")
 
-phrase = session["phrase"]
-
-author = session["author"]
+author = get_quote_api(type="a")
 
 print(session)
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
