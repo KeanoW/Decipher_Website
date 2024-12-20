@@ -59,6 +59,6 @@ def filter_quotes():
                     if line not in stoics.readlines():
                         stoics.write(line)
                         print(line)
-# print(get_qoutes_from_file("Quotes.txt"))
-# get_quote()
-# filter_quotes()
+
+# print(get_quote_api("q"))
+# print(get_quote_api("a"))
