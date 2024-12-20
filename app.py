@@ -1,7 +1,7 @@
-from flask import Flask, render_template,request, session
+from flask import Flask, render_template,request
 import cipher_functions as ciph_function
-from flask_sqlalchemy import SQLAlchemy
-from random import randint
+# from flask_sqlalchemy import SQLAlchemy
+# from random import randint
 from api import get_quote_api
 
 
